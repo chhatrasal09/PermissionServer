@@ -74,3 +74,23 @@ app.get('/getData', (request, response) => {
     });
 
 });
+
+app.get('/dropCollection', (request, response) => {
+    mongoose.connection.db.dropDatabase().then(result => {
+        console.log(result);
+        console.log('Collection Deleted Successfully.');
+        response.json({
+            status: 200,
+            message: 'Success',
+            data: 'Collection Deleted Successfully.'
+        });
+    }).catch(error => {
+        console.log(error);
+        console.log('Collection Not Deleted Successfully.')
+        response.json({
+            status: 500,
+            message: 'Error',
+            data: 'Collection Not Deleted Successfully.'
+        });
+    });
+});
